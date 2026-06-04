@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <!-- Cargamos Bulma CSS para que los estilos funcionen -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <!-- Cargamos FontAwesome para los iconos del teléfono y candado -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Un pequeño ajuste para que el formulario no ocupe toda la pantalla y se vea centrado */
+        .form-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="has-background-light" style="min-height: 100vh;">
+
+  <div class="container px-4">
+    <div class="form-container">
+      
+      <h1 class="title is-4 has-text-centered mb-5">Formulario de Registro</h1>
+      
+      <!-- Agrupamos Nombre y Apellido en una sola fila -->
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label">Nombre</label>
+            <div class="control">
+              <input class="input" id="nombre" type="text" placeholder="Tu nombre">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label class="label">Apellido</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Tu apellido">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tipo y Número de documento -->
+      <div class="columns">
+        <div class="column is-5">
+          <div class="field">
+            <label class="label">Tipo de documento</label>
+            <div class="control">
+              <div class="select is-fullwidth">
+                <select>
+                  <option disabled selected>Seleccione tipo</option>
+                  <option>Cédula de Ciudadanía</option>
+                  <option>Tarjeta de Identidad</option>
+                  <option>Pasaporte</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label class="label">Número de documento</label>
+            <div class="control">
+              <input class="input" id="numero de documento" type="text" placeholder="Número de identificación">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Teléfono y Email -->
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label">Teléfono</label>
+            <div class="control has-icons-left">
+              <input class="input" type="tel" placeholder="Número de contacto">
+              <span class="icon is-small is-left">
+                <i class="fas fa-phone"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" id ="email"  type="email" placeholder="e.g. alexsmith@gmail.com">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Género, Cargo y Fecha de Nacimiento -->
+      <div class="field">
+        <label class="label">Género</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="genero"> Masculino
+          </label>
+          <label class="radio">
+            <input type="radio" name="genero"> Femenino
+          </label>
+          <label class="radio">
+            <input type="radio" name="genero"> Otro
+          </label>
+        </div>
+      </div>
+      
+      <div class="columns mt-2">
+        <div class="column">
+          <div class="field">
+            <label class="label">Cargo</label>
+            <div class="control">
+              <input class="input" id="puesto de trabajo" type="text" placeholder="Puesto de trabajo">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label class="label">Fecha de nacimiento</label>
+            <div class="control">
+              <input class="input" type="date">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Contraseña -->
+      <div class="field mb-5">
+        <label class="label">Contraseña</label>
+        <div class="control has-icons-left">
+          <input class="input" type="password" placeholder="********">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+      </div>
+      
+      <!-- Botones de Acción -->
+      <div class="field is-grouped is-grouped-right mt-5">
+        <div class="control">
+          <button class="button is-light">Cancelar</button>
+        </div>
+        <div class="control">
+          <button class="button is-link">Registrar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiénes Somos - Rocket Racing Restaurant</title>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Fondo oscuro sofisticado */
+        body {
+            background-color: #0d0e12;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Rojo fuego / Neón gastronómico */
+        .text-rocket-red {
+            color: #ff1e43 !important;
+        }
+        
+        .bg-rocket-dark {
+            background-color: #141720 !important;
+        }
+
+        /* Tarjetas con diseño premium */
+        .rocket-card {
+            background-color: #181c26;
+            border: 1px solid #2d1419;
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        .rocket-card:hover {
+            border-color: #ff1e43;
+            box-shadow: 0 0 25px rgba(255, 30, 67, 0.25);
+            transform: translateY(-5px);
+        }
+
+        /* Bloque de estadísticas */
+        .stat-box {
+            text-align: center;
+            padding: 1.5rem;
+            border-left: 3px solid #ff1e43;
+            background: linear-gradient(90deg, rgba(255, 30, 67, 0.05) 0%, transparent 100%);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ff1e43;
+            line-height: 1;
+        }
+
+        /* Botones */
+        .btn-rocket {
+            background-color: #ff1e43 !important;
+            color: #ffffff !important;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            padding: 1.5rem 2.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .btn-rocket:hover {
+            background-color: #e01235 !important;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.5);
+        }
+
+        /* Líneas divisorias en rojo */
+        .rocket-divider {
+            height: 3px;
+            width: 60px;
+            background-color: #ff1e43;
+            margin: 1rem 0 2rem 0;
+        }
+        .rocket-divider.centered {
+            margin: 1rem auto 2rem auto;
+        }
+
+        /* Marco para la foto del fundador */
+        .founder-frame {
+            border: 2px solid #ff1e43;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #181c26;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+        }
+
+        /* Enlaces de contacto */
+        .contact-link {
+            color: #ffffff;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .contact-link:hover {
+            color: #ff1e43;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero is-medium bg-rocket-dark">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <p class="subtitle is-6 is-uppercase text-rocket-red font-weight-bold" style="letter-spacing: 2px;">
+                    <i class="fas fa-fire"></i> Alta Cocina a la Velocidad del Sabor
+                </p>
+                <h1 class="title is-1 has-text-white mt-2 mb-4">
+                    BIENVENIDOS A <span class="text-rocket-red">ROCKET RACING</span>
+                </h1>
+                <div class="rocket-divider centered"></div>
+                <p class="subtitle is-5 has-text-grey-light" style="max-width: 750px; margin: 0 auto;">
+                    Rompiendo los esquemas tradicionales de la gastronomía. Combinamos la adrenalina de un servicio impecable y rápido con sabores explosivos de alta cocina que desafían tus sentidos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: EL FUNDADOR -->
+    <section class="section">
+        <div class="container">
+            <div class="columns is-vcentered mb-6">
+                
+                <!-- Columna Foto / Representación del Fundador -->
+                <div class="column is-5">
+                    <div class="founder-frame p-5 has-text-centered">
+                        <div>
+                            <span class="icon is-large text-rocket-red mb-3">
+                                <i class="fas fa-utensils fa-3x"></i>
+                            </span>
+                            <p class="is-size-4 font-weight-bold has-text-white">Julián David Lince</p>
+                            <p class="is-size-6 text-rocket-red is-uppercase">Fundador & Chef Ejecutivo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Texto de la Historia -->
+                <div class="column is-6 is-offset-1">
+                    <h2 class="title is-3 has-text-white">NUESTRA HISTORIA</h2>
+                    <p class="is-subtitle is-size-6 text-rocket-red is-uppercase">La visión de Julián David Lince</p>
+                    <div class="rocket-divider"></div>
+                    
+                    <p class="body-text has-text-grey-light mb-4">
+                        Detrás de cada plato de <strong>Rocket Racing</strong> está la mente y la pasión de nuestro fundador, <strong>Julián David Lince</strong>. Con la idea fija de que la alta cocina no tiene por qué ser lenta ni aburrida, Julián creó un conceptu único donde la precisión milimétrica del automovilismo se traslada a los fogones.
+                    </p>
+                    <p class="body-text has-text-grey-light mb-5">
+                        Aquí, cada ingrediente es un componente de alta ingeniería y cada receta está diseñada para acelerar tus pulsaciones. No solo servimos comida; creamos una experiencia gastronómica de alto octanaje.
+                    </p>
+                    
+                    <button class="button btn-rocket">
+                        Explorar el Menú &nbsp;<i class="fas fa-utensils"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: NÚMEROS / LOGROS -->
+            <div class="columns is-multiline my-6">
+                <div class="column is-3">
+                    <div class="stat-box">
+                        <div class="stat-number">100%</div>
+                        <p class="has-text-grey-light is-size-7 is-uppercase mt-2">Ingredientes Frescos</p>
+                    </div>
+                </div>
+                <div class="column is-3">
+                    <div class="stat-box">
+                        <div class="stat-number">0 a 100</div>
+                        <p class="has-text-grey-light is-size-7 is-uppercase mt-2">Sabor en Segundos</p>
+                    </div>
+                </div>
+                <div class="column is-3">
+                    <div class="stat-box">
+                        <div class="stat-number">15k+</div>
+                        <p class="has-text-grey-light is-size-7 is-uppercase mt-2">Comensales Felices</p>
+                    </div>
+                </div>
+                <div class="column is-3">
+                    <div class="stat-box">
+                        <div class="stat-number">5 ★</div>
+                        <p class="has-text-grey-light is-size-7 is-uppercase mt-2">Experiencia Premium</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MISIÓN Y VISIÓN -->
+            <div class="columns is-marginless my-6">
+                <div class="column">
+                    <div class="rocket-card">
+                        <div class="mb-4">
+                            <span class="icon is-large text-rocket-red">
+                                <i class="fas fa-stroopwafel fa-2x"></i> 
+                            </span>
+                        </div>
+                        <h3 class="title is-4 has-text-white mb-3">NUESTRA MISIÓN</h3>
+                        <p class="has-text-grey-light">
+                            Revolucionar la experiencia culinaria ofreciendo platos de autor con técnicas vanguardistas, garantizando un servicio dinámico, audaz y un sabor que golpee el paladar de manera instantánea.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="rocket-card">
+                        <div class="mb-4">
+                            <span class="icon is-large text-rocket-red">
+                                <i class="fas fa-star fa-2x"></i>
+                            </span>
+                        </div>
+                        <h3 class="title is-4 has-text-white mb-3">NUESTRA VISIÓN</h3>
+                        <p class="has-text-grey-light">
+                            Llevar el sello gastronómico de Julián David Lince a nivel internacional, consolidando a Rocket Racing como el restaurante referente para los amantes de la comida innovadora, el diseño imponente y la máxima calidad.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="background-color: #2d1419; height: 1px; margin: 4rem 0;">
+
+            <!-- SECCIÓN: CONTACTO, UBICACIÓN Y TELÉFONO -->
+            <section class="section px-0">
+                <div class="has-text-centered mb-6">
+                    <h2 class="title is-3 has-text-white">CENTRAL DE OPERACIONES</h2>
+                    <p class="is-subtitle is-size-6 text-rocket-red is-uppercase">Ponte en contacto con la escudería</p>
+                    <div class="rocket-divider centered"></div>
+                </div>
+
+                <div class="columns is-centered">
+                    <div class="column is-10">
+                        <div class="rocket-card">
+                            <div class="columns is-vcentered has-text-centered-mobile">
+                                
+                                <!-- Ubicación -->
+                                <div class="column has-text-centered">
+                                    <span class="icon is-large text-rocket-red mb-2">
+                                        <i class="fas fa-map-marker-alt fa-2x"></i>
+                                    </span>
+                                    <h4 class="title is-5 has-text-white mb-2">Ubicación</h4>
+                                    <p class="has-text-grey-light">Manizales, Caldas</p>
+                                    <p class="is-size-7 text-rocket-red">Colombia</p>
+                                </div>
+
+                                <!-- Divisor 1 -->
+                                <div class="column is-hidden-mobile is-narrow">
+                                    <div style="width: 1px; height: 80px; background-color: #2d1419; margin: 0 auto;"></div>
+                                </div>
+
+                                <!-- Teléfono -->
+                                <div class="column has-text-centered">
+                                    <span class="icon is-large text-rocket-red mb-2">
+                                        <i class="fas fa-phone-alt fa-2x"></i>
+                                    </span>
+                                    <h4 class="title is-5 has-text-white mb-2">Reservas</h4>
+                                    <p class="mb-1">
+                                        <a href="tel:+573000000000" class="contact-link">
+                                            +57 300 000 0000
+                                        </a>
+                                    </p>
+                                    <p class="is-size-7 has-text-grey-dark">Atención telefónica inmediata</p>
+                                </div>
+
+                                <!-- Divisor 2 -->
+                                <div class="column is-hidden-mobile is-narrow">
+                                    <div style="width: 1px; height: 80px; background-color: #2d1419; margin: 0 auto;"></div>
+                                </div>
+
+                                <!-- Gmail -->
+                                <div class="column has-text-centered">
+                                    <span class="icon is-large text-rocket-red mb-2">
+                                        <i class="fas fa-envelope fa-2x"></i>
+                                    </span>
+                                    <h4 class="title is-5 has-text-white mb-2">Línea Directa</h4>
+                                    <p class="mb-1">
+                                        <a href="mailto:rocketracingrestaurant@gmail.com" class="contact-link">
+                                            rocketracingrestaurant@gmail.com
+                                        </a>
+                                    </p>
+                                    <p class="is-size-7 has-text-grey-dark">Contacto Oficial • Eventos</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-rocket-dark has-text-centered has-text-grey-light py-5">
+        <p>© 2026 <strong>Rocket Racing Restaurant</strong>. Creado por Julián David Lince. Manizales, Colombia.</p>
+    </footer>
+
+</body>
+</html>

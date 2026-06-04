@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Especial - Registro</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-accent: #009432;
+            --secondary-accent: #FFC312;
+            --dark-text: #2f3542;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f2f0;
+            background-image: url("https://www.transparenttextures.com/patterns/food.png");
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .box {
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 148, 50, 0.15);
+            padding: 3rem;
+            max-width: 550px;
+            width: 100%;
+            border: 2px solid rgba(255, 195, 18, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .title {
+            color: var(--dark-text);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2.5rem !important;
+        }
+
+        .label {
+            font-weight: 700;
+            color: var(--primary-accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .input, .select select {
+            border-radius: 12px;
+            border: 2px solid #dfe4ea;
+            height: 3em;
+        }
+
+        .button.is-primary {
+            background-color: var(--primary-accent);
+            border-radius: 12px;
+            font-weight: 700;
+            height: 3.5em;
+            width: 100%;
+            border: none;
+        }
+
+        .button.is-light {
+            border-radius: 12px;
+            height: 3.5em;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .header-badge {
+            background: var(--secondary-accent);
+            color: var(--dark-text);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .centered-container {
+            text-align: center;
+        }
+
+        .pop-in {
+            animation: popIn 0.6s;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box pop-in">
+
+    <div class="centered-container">
+        <div class="header-badge">MENÚ ESPECIAL</div>
+        <h2 class="title is-3">¡Haz tu Pedido!</h2>
+    </div>
+
+    <div class="columns is-mobile is-multiline">
+
+        <div class="column is-7-tablet is-12-mobile">
+            <div class="field">
+                <label class="label">Ubicación / Mesa</label>
+                <div class="control">
+                    <input class="input" id ="ubicacion"  type="text" placeholder="Ej: Mesa 2">
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-5-tablet is-12-mobile">
+            <div class="field">
+                <label class="label">Cantidad</label>
+                <div class="control">
+                    <input class="input" id= "cantidad" type="number" value="1" min="1">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="field">
+        <label class="label">Platillo Especial</label>
+        <div class="control">
+            <div class="select is-fullwidth">
+                <select>
+                    <option disabled selected>Selecciona tu favorito</option>
+                    <option>🍰 Postre tres leches</option>
+                    <option>🍕 Pizza</option>
+                    <option>🍔 Hamburguesa</option>
+                    <option>🌭 Salchipapa</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Comentarios</label>
+        <div class="control">
+            <input class="input" type="text" id="comentarios" placeholder="¿Alguna preferencia especial?">
+        </div>
+    </div>
+
+    <hr style="background-color: #dfe4ea; height: 1px; margin: 2rem 0;">
+
+    <div class="columns is-mobile">
+        <div class="column">
+            <button class="button is-light">Limpiar</button>
+        </div>
+        <div class="column">
+            <button class="button is-primary">Confirmar Pedido</button>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BURGER RACING - Registro</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Poppins;
+            background: #111;
+            background-image: linear-gradient(135deg, #111, #1c1c1c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .box {
+            width: 550px;
+            border-radius: 20px;
+            padding: 35px;
+            background: #1f1f1f;
+            box-shadow: 0px 0px 25px rgba(230, 57, 70, .5);
+        }
+
+        .title {
+            text-align: center;
+            color: #e63946;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #f1faee;
+            margin-bottom: 25px;
+        }
+
+        .label {
+            color: #f1faee;
+            font-weight: bold;
+        }
+
+        .input,
+        .select select {
+            background: #2b2b2b;
+            color: white;
+            border: none;
+        }
+
+        .input::placeholder {
+            color: #aaa;
+        }
+
+        .button.is-link {
+            background: #e63946;
+            border: none;
+            font-weight: bold;
+        }
+
+        .button.is-link:hover {
+            background: #c1121f;
+        }
+
+        .header-logo {
+            text-align: center;
+            font-size: 28px;
+            color: #ffd60a;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <div class="header-logo">🍔 BURGER RACING 🏁</div>
+
+        <h2 class="title">Registro de Usuario</h2>
+        <p class="subtitle">Únete al sabor más rápido de la ciudad</p>
+
+        <div class="field">
+            <label class="label">Nombre</label>
+            <input class="input" id="nombre" type="text" placeholder="Tu nombre">
+        </div>
+
+        <div class="field">
+            <label class="label">Apellido</label>
+            <input class="input" type="text" placeholder="Tu apellido">
+        </div>
+
+        <div class="field">
+            <label class="label">Tipo de Documento</label>
+            <div class="select is-fullwidth">
+                <select>
+                    <option>Seleccione tipo</option>
+                    <option>Cédula de Ciudadanía</option>
+                    <option>Tarjeta de Identidad</option>
+                    <option>Pasaporte</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Número de Documento</label>
+            <input class="input" type="text" placeholder="Número de identificación">
+        </div>
+
+        <div class="field">
+            <label class="label">Teléfono</label>
+            <input class="input" type="tel" placeholder="Número de contacto">
+        </div>
+
+        <div class="field">
+            <label class="label">Email</label>
+            <input class="input" type="email" placeholder="correo@gmail.com">
+        </div>
+
+        <div class="field">
+            <label class="label">Género</label>
+            <label class="radio"><input type="radio" name="genero"> Masculino</label>
+            <label class="radio"><input type="radio" name="genero"> Femenino</label>
+            <label class="radio"><input type="radio" name="genero"> Otro</label>
+        </div>
+
+        <div class="field">
+            <label class="label">Cargo</label>
+            <input class="input" id="cargo" type="text" placeholder="Puesto de trabajo">
+        </div>
+
+        <div class="field">
+            <label class="label">Fecha de Nacimiento</label>
+            <input class="input" id ="fecha_de_nacimiento" type="date">
+        </div>
+
+        <div class="field">
+            <label class="label">Contraseña</label>
+            <input class="input" id="contraseña" type="password" placeholder="********">
+        </div>
+
+        <div class="field is-grouped is-justify-content-space-between">
+            <button class="button is-link">Registrarse</button>
+            <button class="button is-light">Cancelar</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
