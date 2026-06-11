@@ -15,7 +15,7 @@ let contrasena = document.getElementById("contrasena").value;
 
 
 function Nmbre() {
-    if (nombre_US === "" || apellido_US === "" || fechaNacimiento === "" || tipoDocumento === "" || numeroDocumento === "" || telefono === "" || email === "" || contrasena === "") {
+    if (nombre_US === "" || apellido_US === "" || fechaNacimiento === "" || tipoDocumento === "" || numeroDocumento === "" || telefono === "" || email === "" || contraseña === "") {
         console.log("Por favor, ingresa tu nombre.");
     }
     else {
