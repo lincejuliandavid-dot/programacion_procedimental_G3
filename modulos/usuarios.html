@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Registro</title>
-    <!-- Cargamos Bulma CSS para que los estilos funcionen -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
-    <!-- Cargamos FontAwesome para los iconos del teléfono y candado -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
-        /* Un pequeño ajuste para que el formulario no ocupe toda la pantalla y se vea centrado */
         .form-container {
             max-width: 600px;
             margin: 3rem auto;
@@ -27,13 +25,12 @@
       
       <h1 class="title is-4 has-text-centered mb-5">Formulario de Registro</h1>
       
-      <!-- Agrupamos Nombre y Apellido en una sola fila -->
       <div class="columns">
         <div class="column">
           <div class="field">
             <label class="label">Nombre</label>
             <div class="control">
-              <input class="input" id="nombre" type="text" placeholder="Tu nombre">
+              <input class="input" id="nombre_US" type="text" placeholder="Tu nombre">
             </div>
           </div>
         </div>
@@ -41,24 +38,23 @@
           <div class="field">
             <label class="label">Apellido</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Tu apellido">
+              <input class="input" id="apellido_US" type="text" placeholder="Tu apellido">
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Tipo y Número de documento -->
       <div class="columns">
         <div class="column is-5">
           <div class="field">
             <label class="label">Tipo de documento</label>
             <div class="control">
               <div class="select is-fullwidth">
-                <select>
-                  <option disabled selected>Seleccione tipo</option>
-                  <option>Cédula de Ciudadanía</option>
-                  <option>Tarjeta de Identidad</option>
-                  <option>Pasaporte</option>
+                <select id="tipoDocumento">
+                  <option disabled selected value="">Seleccione tipo</option>
+                  <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+                  <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                  <option value="Pasaporte">Pasaporte</option>
                 </select>
               </div>
             </div>
@@ -68,19 +64,18 @@
           <div class="field">
             <label class="label">Número de documento</label>
             <div class="control">
-              <input class="input" id="numero de documento" type="text" placeholder="Número de identificación">
+              <input class="input" id="numeroDocumento" type="text" placeholder="Número de identificación">
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Teléfono y Email -->
       <div class="columns">
         <div class="column">
           <div class="field">
             <label class="label">Teléfono</label>
             <div class="control has-icons-left">
-              <input class="input" type="tel" placeholder="Número de contacto">
+              <input class="input" id="telefono" type="tel" placeholder="Número de contacto">
               <span class="icon is-small is-left">
                 <i class="fas fa-phone"></i>
               </span>
@@ -91,24 +86,38 @@
           <div class="field">
             <label class="label">Email</label>
             <div class="control">
-              <input class="input" id ="email"  type="email" placeholder="e.g. alexsmith@gmail.com">
+              <input class="input" id="email" type="email" placeholder="e.g. alexsmith@gmail.com">
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Género, Cargo y Fecha de Nacimiento -->
       <div class="field">
         <label class="label">Género</label>
         <div class="control">
           <label class="radio">
-            <input type="radio" name="genero"> Masculino
+            <input type="radio" name="genero" id="masculino" value="Masculino"> Masculino
           </label>
           <label class="radio">
-            <input type="radio" name="genero"> Femenino
+            <input type="radio" name="genero" id="femenino" value="Femenino"> Femenino
           </label>
           <label class="radio">
-            <input type="radio" name="genero"> Otro
+            <input type="radio" name="genero" id="otro" value="Otro"> Otro
+          </label>
+        </div>
+      </div>
+      
+      <div class="field mt-4">
+        <label class="label">Rol en la Empresa</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="rol" id="cliente" value="Cliente"> Cliente
+          </label>
+          <label class="radio">
+            <input type="radio" name="rol" id="empleado" value="Empleado"> Empleado
+          </label>
+          <label class="radio">
+            <input type="radio" name="rol" id="administrador" value="Administrador"> Administrador
           </label>
         </div>
       </div>
@@ -116,45 +125,37 @@
       <div class="columns mt-2">
         <div class="column">
           <div class="field">
-            <label class="label">Cargo</label>
-            <div class="control">
-              <input class="input" id="puesto de trabajo" type="text" placeholder="Puesto de trabajo">
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="field">
             <label class="label">Fecha de nacimiento</label>
             <div class="control">
-              <input class="input" type="date">
+              <input class="input" id="fechaNacimiento" type="date">
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Contraseña -->
       <div class="field mb-5">
         <label class="label">Contraseña</label>
         <div class="control has-icons-left">
-          <input class="input" type="password" placeholder="********">
+          <input class="input" id="contrasena" type="password" placeholder="********">
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
         </div>
       </div>
       
-      <!-- Botones de Acción -->
       <div class="field is-grouped is-grouped-right mt-5">
         <div class="control">
-          <button class="button is-light">Cancelar</button>
+          <button class="button is-light" type="button" id="btnCancelar">Cancelar</button>
         </div>
         <div class="control">
-          <button class="button is-link">Registrar</button>
+          <button class="button is-link" type="button" onclick="Nmbre()">Registrar</button>
         </div>
       </div>
 
     </div>
   </div>
-<script src="../js/usuarios.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/usuarios.js"></script>
 </body>
 </html>
