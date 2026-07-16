@@ -6,7 +6,7 @@
     <title>Menú Especial - Registro</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -114,7 +114,7 @@
             <div class="field">
                 <label class="label">Ubicación / Mesa</label>
                 <div class="control">
-                    <input class="input" id ="ubicacion"  type="text" placeholder="Ej: Mesa 2">
+                    <input class="input" id="ubicacion" type="text" placeholder="Ej: Mesa 2">
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@
             <div class="field">
                 <label class="label">Cantidad</label>
                 <div class="control">
-                    <input class="input" id= "cantidad" type="number" value="1" min="1">
+                    <input class="input" id="cantidad" type="number" value="1" min="1">
                 </div>
             </div>
         </div>
@@ -134,8 +134,8 @@
         <label class="label">Platillo Especial</label>
         <div class="control">
             <div class="select is-fullwidth">
-                <select>
-                    <option disabled selected>Selecciona tu favorito</option>
+                <select id="platillo">
+                    <option disabled selected value="">Selecciona tu favorito</option>
                     <option>🍰 Postre tres leches</option>
                     <option>🍕 Pizza</option>
                     <option>🍔 Hamburguesa</option>
@@ -156,14 +156,16 @@
 
     <div class="columns is-mobile">
         <div class="column">
-            <button class="button is-light">Limpiar</button>
+            <button class="button is-light" id="btn-limpiar">Limpiar</button>
         </div>
         <div class="column">
-            <button class="button is-primary">Confirmar Pedido</button>
+            <button class="button is-primary" id="btn-confirmar">Confirmar Pedido</button>
         </div>
     </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../js/inventarios.js"></script>
 </body>
 </html>

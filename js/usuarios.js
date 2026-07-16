@@ -26,7 +26,7 @@ function Nmbre() {
             console.log("El apellido no puede contener números.");
         }
         else if(numeroDocumento.length != 10 || numeroDocumento !=/[0-9]+/){
-            console.log("El número de documento debe tener 10 dígitos.");
+            console.log("El número de documento debe tener 10 dígit.os.");
         }
         else if(telefono.length != 10 || telefono !=/[0-9]+/){
             console.log("El número de teléfono debe tener 10 dígitos.");

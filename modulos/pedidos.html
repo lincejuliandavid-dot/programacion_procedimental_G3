@@ -4,22 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>BURGER RACING - Registro</title>
+    <title>BURGER RACING - Contabilidad</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         body {
-            font-family: Poppins;
+            font-family: 'Poppins', sans-serif;
             background: #111;
             background-image: linear-gradient(135deg, #111, #1c1c1c);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 40px 0;
         }
 
         .box {
@@ -46,8 +47,7 @@
             font-weight: bold;
         }
 
-        .input,
-        .select select {
+        .input {
             background: #2b2b2b;
             color: white;
             border: none;
@@ -55,6 +55,19 @@
 
         .input::placeholder {
             color: #aaa;
+        }
+
+        /* Estilo cuando el input tiene un error */
+        .input.is-danger {
+            border: 1px solid #e63946 !important;
+            background: #3a1f21;
+        }
+
+        /* Estilo para los mensajes de error de Bulma abajo de los inputs */
+        .help.is-danger {
+            color: #ff4a5a !important;
+            font-weight: 500;
+            margin-top: 5px;
         }
 
         .button.is-link {
@@ -74,84 +87,70 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+
+        .divider {
+            height: 1px;
+            background-color: #333;
+            margin: 20px 0;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="box">
-
         <div class="header-logo">🍔 BURGER RACING 🏁</div>
+        <h2 class="title">Contabilidad</h2>
+        <p class="subtitle">Registro y Control Financiero</p>
 
-        <h2 class="title">Registro de Usuario</h2>
-        <p class="subtitle">Únete al sabor más rápido de la ciudad</p>
+        <form id="formPedidos">
 
-        <div class="field">
-            <label class="label">Nombre</label>
-            <input class="input" id="nombre" type="text" placeholder="Tu nombre">
-        </div>
-
-        <div class="field">
-            <label class="label">Apellido</label>
-            <input class="input" type="text" placeholder="Tu apellido">
-        </div>
-
-        <div class="field">
-            <label class="label">Tipo de Documento</label>
-            <div class="select is-fullwidth">
-                <select>
-                    <option>Seleccione tipo</option>
-                    <option>Cédula de Ciudadanía</option>
-                    <option>Tarjeta de Identidad</option>
-                    <option>Pasaporte</option>
-                </select>
+            <div class="field">
+                <label class="label">Fecha de Corte</label>
+                <input class="input" id="fechaCorte" type="date">
+                <p class="help is-danger" id="error-fechaCorte"></p>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label">Número de Documento</label>
-            <input class="input" type="text" placeholder="Número de identificación">
-        </div>
+            <div class="field">
+                <label class="label">Concepto / Descripción</label>
+                <input class="input" id="concepto" type="text" placeholder="Ej. Ventas del día, Compra de insumos...">
+                <p class="help is-danger" id="error-concepto"></p>
+            </div>
 
-        <div class="field">
-            <label class="label">Teléfono</label>
-            <input class="input" type="tel" placeholder="Número de contacto">
-        </div>
+            <div class="field">
+                <label class="label">Valor Total ($)</label>
+                <input class="input" id="valorTotal" type="number" step="0.01" placeholder="0.00">
+                <p class="help is-danger" id="error-valorTotal"></p>
+            </div>
 
-        <div class="field">
-            <label class="label">Email</label>
-            <input class="input" type="email" placeholder="correo@gmail.com">
-        </div>
+            <div class="divider"></div>
+            <p class="label" style="text-align: center; color: #ffd60a;">Distribución de Montos</p>
+            <p class="help is-danger" id="error-grupoMontos" style="text-align: center; margin-bottom: 15px;"></p>
 
-        <div class="field">
-            <label class="label">Género</label>
-            <label class="radio"><input type="radio" name="genero"> Masculino</label>
-            <label class="radio"><input type="radio" name="genero"> Femenino</label>
-            <label class="radio"><input type="radio" name="genero"> Otro</label>
-        </div>
+            <div class="field">
+                <label class="label">Ventas Semanales ($)</label>
+                <input class="input" id="ventasSemanales" type="number" step="0.01" placeholder="Opcional">
+            </div>
 
-        <div class="field">
-            <label class="label">Cargo</label>
-            <input class="input" id="cargo" type="text" placeholder="Puesto de trabajo">
-        </div>
+            <div class="field">
+                <label class="label">Otros Ingresos ($)</label>
+                <input class="input" id="ingresos" type="number" step="0.01" placeholder="Opcional">
+            </div>
 
-        <div class="field">
-            <label class="label">Fecha de Nacimiento</label>
-            <input class="input" id ="fecha_de_nacimiento" type="date">
-        </div>
+            <div class="field">
+                <label class="label">Egresos / Gastos ($)</label>
+                <input class="input" id="egresos" type="number" step="0.01" placeholder="Opcional">
+            </div>
 
-        <div class="field">
-            <label class="label">Contraseña</label>
-            <input class="input" id="contraseña" type="password" placeholder="********">
-        </div>
+            <div class="field is-grouped is-justify-content-space-between mt-5">
+                <button type="submit" class="button is-link">Guardar Registro</button>
+                <button type="button" class="button is-light" id="btnCancelar">Cancelar</button>
+            </div>
 
-        <div class="field is-grouped is-justify-content-space-between">
-            <button class="button is-link">Registrarse</button>
-            <button class="button is-light">Cancelar</button>
-        </div>
-
+        </form>
     </div>
 
+    <script src="script.js"></script>
 </body>
 
 </html>
