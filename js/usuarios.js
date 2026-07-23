@@ -1,158 +1,207 @@
-function Nmbre() {
-    // 1. Capturamos los valores en tiempo real (al hacer clic en el botón)
-    let fechaNacimiento = document.getElementById("fechaNacimiento").value;
-    let nombre_US = document.getElementById("nombre_US").value.trim();
-    let apellido_US = document.getElementById("apellido_US").value.trim();
-    let tipoDocumento = document.getElementById("tipoDocumento").value;
-    let numeroDocumento = document.getElementById("numeroDocumento").value.trim();
-    let telefono = document.getElementById("telefono").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let contrasena = document.getElementById("contrasena").value;
+document.addEventListener('DOMContentLoaded', () => {
+   
+    const inputNombre = document.getElementById('nombre_US');
+    const inputApellido = document.getElementById('apellido_US');
+    const inputTipoDoc = document.getElementById('tipoDocumento');
+    const inputNumDoc = document.getElementById('numeroDocumento');
+    const inputTelefono = document.getElementById('telefono');
+    const inputEmail = document.getElementById('email');
+    const inputFechaNac = document.getElementById('fechaNacimiento');
+    const inputContrasena = document.getElementById('contrasena');
 
-    // Capturar si se ha seleccionado algún radio button para Género y Rol
-    let generoSeleccionado = document.querySelector('input[name="genero"]:checked');
-    let rolSeleccionado = document.querySelector('input[name="rol"]:checked');
+   
+    const btnRegistrar = document.querySelector('button.is-link');
+    const btnCancelar = document.getElementById('btnCancelar');
 
-    // Expresiones Regulares para validar formatos
-    const soloLetras = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
-    const soloNumeros = /^[0-9]+$/;
-
-    // 2. Validación de campos de texto vacíos
-    if (nombre_US === "" || apellido_US === "" || fechaNacimiento === "" || tipoDocumento === "" || numeroDocumento === "" || telefono === "" || email === "" || contrasena === "") {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Campos vacíos',
-            text: 'Por favor, rellene todos los campos de texto del formulario.',
-            confirmButtonColor: '#3085d6'
-        });
-        return; // Detiene la ejecución aquí
+    
+    function obtenerContenedorError(inputElement) {
+       
+        let contenedorPadre = inputElement.closest('.control') || inputElement.closest('.select');
+        let campoField = contenedorPadre.closest('.field');
+        
+        let errorParagraph = campoField.querySelector('.help.is-danger');
+        if (!errorParagraph) {
+            errorParagraph = document.createElement('p');
+            errorParagraph.className = 'help is-danger';
+            campoField.appendChild(errorParagraph);
+        }
+        return errorParagraph;
     }
 
-    // Validación de Género vacío
-    if (!generoSeleccionado) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Falta seleccionar el género',
-            text: 'Por favor, selecciona una opción de género (Masculino, Femenino u Otro).',
-            confirmButtonColor: '#3085d6'
-        });
-        return;
-    }
-
-    // Validación de Rol vacío
-    if (!rolSeleccionado) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Falta seleccionar el rol',
-            text: 'Por favor, selecciona un rol en la empresa (Cliente, Empleado o Administrador).',
-            confirmButtonColor: '#3085d6'
-        });
-        return;
-    }
-
-    // 3. Validaciones de Formato Específicas
-
-    // Validar que el nombre solo contenga letras
-    if (!soloLetras.test(nombre_US)) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Nombre inválido',
-            text: 'El nombre no puede contener números ni caracteres especiales.',
-            confirmButtonColor: '#d33'
-        });
-    } 
-    // Validar que el apellido solo contenga letras
-    else if (!soloLetras.test(apellido_US)) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Apellido inválido',
-            text: 'El apellido no puede contener números ni caracteres especiales.',
-            confirmButtonColor: '#d33'
-        });
-    } 
-    // Validar que el documento sea numérico y de exactamente 10 caracteres
-    else if (numeroDocumento.length !== 10 || !soloNumeros.test(numeroDocumento)) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Documento incorrecto',
-            text: 'El número de documento debe tener exactamente 10 dígitos numéricos.',
-            confirmButtonColor: '#d33'
-        });
-    } 
-    // Validar que el teléfono sea numérico y de exactamente 10 caracteres
-    else if (telefono.length !== 10 || !soloNumeros.test(telefono)) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Teléfono incorrecto',
-            text: 'El número de teléfono debe tener exactamente 10 dígitos numéricos.',
-            confirmButtonColor: '#d33'
-        });
-    } 
-    // Validar el formato de correo electrónico
-    else if (!email.includes("@") || !email.includes(".")) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Email inválido',
-            text: 'Por favor, ingresa una dirección de correo electrónico válida.',
-            confirmButtonColor: '#d33'
-        });
-    } 
-    // Validar longitud de la contraseña minimo 8 
-    else if (contrasena.length < 8) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Contraseña muy corta',
-            text: 'La contraseña debe tener al menos 8 caracteres.',
-            confirmButtonColor: '#d33'
-        });
-    } 
-    // ¡Todo correcto! Se guarda el registro
-    else {
-        Swal.fire({
-            icon: 'success',
-            title: '¡Registro exitoso!',
-            text: `El usuario ${nombre_US} ha sido guardado exitosamente con el rol de ${rolSeleccionado.value}.`,
-            confirmButtonColor: '#48c78e'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                limpiarFormulario();
+    // Limpiar clases de error y mensajes del formulario
+    function limpiarErrores() {
+        const inputs = [inputNombre, inputApellido, inputTipoDoc, inputNumDoc, inputTelefono, inputEmail, inputFechaNac, inputContrasena];
+        
+        inputs.forEach(input => {
+            if (input) {
+                input.classList.remove('is-danger');
+               
+                if (input.tagName === 'SELECT') {
+                    input.closest('.select').classList.remove('is-danger');
+                }
+                const pError = obtenerContenedorError(input);
+                pError.textContent = '';
             }
         });
+
+      
+        const grupoGeneros = document.getElementById('error-genero');
+        if (grupoGeneros) grupoGeneros.textContent = '';
+        const grupoRoles = document.getElementById('error-rol');
+        if (grupoRoles) grupoRoles.textContent = '';
     }
-}
 
-// Función para restablecer los campos del formulario
-function limpiarFormulario() {
-    document.getElementById("nombre_US").value = "";
-    document.getElementById("apellido_US").value = "";
-    document.getElementById("fechaNacimiento").value = "";
-    document.getElementById("tipoDocumento").selectedIndex = 0;
-    document.getElementById("numeroDocumento").value = "";
-    document.getElementById("telefono").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("contrasena").value = "";
+   
+    function validarYRegistrar() {
+        limpiarErrores();
+        let tieneErrores = false;
 
-    let genero = document.querySelector('input[name="genero"]:checked');
-    if (genero) genero.checked = false;
-
-    let rol = document.querySelector('input[name="rol"]:checked');
-    if (rol) rol.checked = false;
-}
-
-// Escuchador para el botón Cancelar en el formulario
-document.getElementById('btnCancelar').addEventListener('click', () => {
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: "Se borrarán los datos que hayas ingresado en el formulario.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#f14668',
-        cancelButtonColor: '#7a7a7a',
-        confirmButtonText: 'Sí, borrar todo',
-        cancelButtonText: 'No, continuar editando'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            limpiarFormulario();
+        // 1. Validar Nombre
+        if (inputNombre.value.trim() === '') {
+            inputNombre.classList.add('is-danger');
+            obtenerContenedorError(inputNombre).textContent = 'El nombre no puede estar vacío.';
+            tieneErrores = true;
         }
-    });
+
+        // 2. Validar Apellido
+        if (inputApellido.value.trim() === '') {
+            inputApellido.classList.add('is-danger');
+            obtenerContenedorError(inputApellido).textContent = 'El apellido no puede estar vacío.';
+            tieneErrores = true;
+        }
+
+        // 3. Validar Tipo de Documento
+        if (inputTipoDoc.value === '') {
+            inputTipoDoc.closest('.select').classList.add('is-danger');
+            obtenerContenedorError(inputTipoDoc).textContent = 'Selecciona un tipo de documento.';
+            tieneErrores = true;
+        }
+
+        // 4. Validar Número de Documento
+        if (inputNumDoc.value.trim() === '') {
+            inputNumDoc.classList.add('is-danger');
+            obtenerContenedorError(inputNumDoc).textContent = 'El número de documento es obligatorio.';
+            tieneErrores = true;
+        }
+
+        // 5. Validar Teléfono
+        if (inputTelefono.value.trim() === '') {
+            inputTelefono.classList.add('is-danger');
+            obtenerContenedorError(inputTelefono).textContent = 'El teléfono es obligatorio.';
+            tieneErrores = true;
+        }
+
+        // 6. Validar Email
+        if (inputEmail.value.trim() === '') {
+            inputEmail.classList.add('is-danger');
+            obtenerContenedorError(inputEmail).textContent = 'El correo electrónico es obligatorio.';
+            tieneErrores = true;
+        }
+
+        // 7. Validar Género (Radio)
+        const generoSeleccionado = document.querySelector('input[name="genero"]:checked');
+        if (!generoSeleccionado) {
+            let contenedorRadios = document.querySelector('input[name="genero"]').closest('.field');
+            let pError = contenedorRadios.querySelector('.help.is-danger') || document.createElement('p');
+            pError.id = 'error-genero';
+            pError.className = 'help is-danger';
+            pError.textContent = 'Debes seleccionar un género.';
+            contenedorRadios.appendChild(pError);
+            tieneErrores = true;
+        }
+
+        // 8. Validar Rol (Radio)
+        const rolSeleccionado = document.querySelector('input[name="rol"]:checked');
+        if (!rolSeleccionado) {
+            let contenedorRoles = document.querySelector('input[name="rol"]').closest('.field');
+            let pError = contenedorRoles.querySelector('.help.is-danger') || document.createElement('p');
+            pError.id = 'error-rol';
+            pError.className = 'help is-danger';
+            pError.textContent = 'Debes seleccionar un rol para el usuario.';
+            contenedorRoles.appendChild(pError);
+            tieneErrores = true;
+        }
+
+        // 9. Validar Fecha de Nacimiento
+        if (!inputFechaNac.value) {
+            inputFechaNac.classList.add('is-danger');
+            obtenerContenedorError(inputFechaNac).textContent = 'La fecha de nacimiento es obligatoria.';
+            tieneErrores = true;
+        }
+
+        // 10. Validar Contraseña
+        if (inputContrasena.value.length < 6) {
+            inputContrasena.classList.add('is-danger');
+            obtenerContenedorError(inputContrasena).textContent = 'La contraseña debe tener al menos 6 caracteres.';
+            tieneErrores = true;
+        }
+
+        
+        if (tieneErrores) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Campos Incompletos',
+                text: 'Por favor, rellene todos los espacios marcados.',
+                confirmButtonColor: '#485fc7'
+            });
+            return;
+        }
+
+       
+        const datosUsuario = {
+            nombre: inputNombre.value.trim(),
+            apellido: inputApellido.value.trim(),
+            documento: {
+                tipo: inputTipoDoc.value,
+                numero: inputNumDoc.value.trim()
+            },
+            contacto: {
+                telefono: inputTelefono.value.trim(),
+                email: inputEmail.value.trim()
+            },
+            genero: generoSeleccionado.value,
+            rol: rolSeleccionado.value,
+            fechaNacimiento: inputFechaNac.value,
+            contrasena: inputContrasena.value
+        };
+
+        console.log(" [Registro] Datos de usuario validados correctamente:");
+        console.log(datosUsuario);
+
+        Swal.fire({
+            icon: 'success',
+            title: '¡Registro Exitoso!',
+            text: `El usuario ${datosUsuario.nombre} ${datosUsuario.apellido} ha sido creado con el rol de ${datosUsuario.rol}.`,
+            confirmButtonColor: '#485fc7'
+        }).then(() => {
+            reiniciarFormulario();
+        });
+    }
+
+    function reiniciarFormulario() {
+        inputNombre.value = '';
+        inputApellido.value = '';
+        inputTipoDoc.value = '';
+        inputNumDoc.value = '';
+        inputTelefono.value = '';
+        inputEmail.value = '';
+        inputFechaNac.value = '';
+        inputContrasena.value = '';
+
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => radio.checked = false);
+
+        limpiarErrores();
+        console.log(" Formulario de registro limpio.");
+    }
+
+    // Asignación limpia de eventos (Adiós a los onclick directos en HTML)
+    if (btnRegistrar) {
+        btnRegistrar.removeAttribute('onclick'); // Remueve el antiguo atributo para evitar conflictos
+        btnRegistrar.addEventListener('click', validarYRegistrar);
+    }
+
+    if (btnCancelar) {
+        btnCancelar.addEventListener('click', reiniciarFormulario);
+    }
 });

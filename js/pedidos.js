@@ -1,147 +1,127 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-    const form = document.getElementById('formPedidos');
+document.addEventListener('DOMContentLoaded', () => {
+    const formulario = document.getElementById('formPedidos');
+
+   
+    const inputFecha = document.getElementById('fechaCorte');
+    const inputConcepto = document.getElementById('concepto');
+    const inputValorTotal = document.getElementById('valorTotal');
+    const inputVentas = document.getElementById('ventasSemanales');
+    const inputIngresos = document.getElementById('ingresos');
+    const inputEgresos = document.getElementById('egresos');
+
+    const errorFecha = document.getElementById('error-fechaCorte');
+    const errorConcepto = document.getElementById('error-concepto');
+    const errorValorTotal = document.getElementById('error-valorTotal');
+    const errorGrupoMontos = document.getElementById('error-grupoMontos');
+
     const btnCancelar = document.getElementById('btnCancelar');
 
-    // Función auxiliar para pintar de rojo el input y poner el texto de error debajo
-    function mostrarError(idElemento, mensaje) {
-        const elemento = document.getElementById(idElemento);
-        if (elemento) {
-            elemento.classList.add('is-danger'); 
-        }
-        const contenedorError = document.getElementById(`error-${idElemento}`);
-        if (contenedorError) {
-            contenedorError.textContent = mensaje; 
-        }
+    // Función para limpiar alertas previas
+    function limpiarErrores() {
+        [inputFecha, inputConcepto, inputValorTotal, inputVentas, inputIngresos, inputEgresos].forEach(input => {
+            input.classList.remove('is-danger');
+        });
+        [errorFecha, errorConcepto, errorValorTotal, errorGrupoMontos].forEach(p => {
+            p.textContent = "";
+        });
     }
 
-    if (form) {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); 
+-
+    formulario.addEventListener('submit', function(evento) {
+        evento.preventDefault(); 
+        limpiarErrores();
 
-            // Limpiamos los errores visuales previos
-            document.querySelectorAll('.help.is-danger').forEach(el => el.textContent = '');
-            document.querySelectorAll('.input').forEach(el => el.classList.remove('is-danger'));
+        // Extraer valores limpando espacios en blanco
+        const fechaCorte = inputFecha.value;
+        const concepto = inputConcepto.value.trim();
+        const valorTotal = inputValorTotal.value;
+        const ventasSemanales = inputVentas.value;
+        const ingresos = inputIngresos.value;
+        const egresos = inputEgresos.value;
 
-            // Capturamos los valores directamente desde el formulario
-            const fechaCorte = document.getElementById('fechaCorte').value;
-            const concepto = document.getElementById('concepto').value;
-            const valorTotal = document.getElementById('valorTotal').value;
-            
-            const ventasSemanales = document.getElementById('ventasSemanales').value;
-            const ingresos = document.getElementById('ingresos').value;
-            const egresos = document.getElementById('egresos').value;
+        let tieneErrores = false;
 
-            let esValido = true;
+        // 1. Validar Fecha de Corte
+        if (!fechaCorte) {
+            inputFecha.classList.add('is-danger');
+            errorFecha.textContent = "La fecha de corte es obligatoria.";
+            tieneErrores = true;
+        }
 
-            // 1. Validar Fecha de Corte
-            if (!fechaCorte) {
-                mostrarError('fechaCorte', 'Por favor, selecciona una Fecha de Corte.');
-                esValido = false;
+        // 2. Validar Concepto
+        if (concepto === "") {
+            inputConcepto.classList.add('is-danger');
+            errorConcepto.textContent = "Debes ingresar un concepto o descripción.";
+            tieneErrores = true;
+        }
+
+        // 3. Validar Valor Total
+        if (!valorTotal || parseFloat(valorTotal) <= 0) {
+            inputValorTotal.classList.add('is-danger');
+            errorValorTotal.textContent = "El valor total debe ser un monto mayor a 0.";
+            tieneErrores = true;
+        }
+
+        // 4. Validar Distribución de Montos (Al menos uno requerido)
+        if (!ventasSemanales && !ingresos && !egresos) {
+            inputVentas.classList.add('is-danger');
+            inputIngresos.classList.add('is-danger');
+            inputEgresos.classList.add('is-danger');
+            errorGrupoMontos.textContent = "Error: Rellena al menos un campo en la Distribución de Montos.";
+            tieneErrores = true;
+        }
+
+       
+        if (tieneErrores) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Registro Incompleto',
+                text: 'Por favor, revisa los campos marcados en rojo.',
+                confirmButtonColor: '#e63946',
+                background: '#1f1f1f',
+                color: '#f1faee'
+            });
+            return;
+        }
+
+        // 5. Si todo está correcto, imprimir objeto limpio en consola
+        console.log("🏁 [BURGER RACING] Registro financiero guardado con éxito:");
+        console.log({
+            fechaCorte: fechaCorte,
+            concepto: concepto,
+            valorTotal: parseFloat(valorTotal),
+            distribucion: {
+                ventasSemanales: parseFloat(ventasSemanales) || 0,
+                otrosIngresos: parseFloat(ingresos) || 0,
+                egresosGastos: parseFloat(egresos) || 0
             }
+        });
 
-            // 2. Validar Concepto
-            if (concepto.trim() === "") {
-                mostrarError('concepto', 'El campo "Concepto" no puede estar vacío.');
-                esValido = false;
-            }
-
-            // 3. Validar Valor Total
-            if (!valorTotal || parseFloat(valorTotal) <= 0) {
-                mostrarError('valorTotal', 'El "Valor Total" debe ser un número mayor a 0.');
-                esValido = false;
-            }
-
-            // 4. Validar montos opcionales
-            if (!ventasSemanales && !ingresos && !egresos) {
-                document.getElementById('ventasSemanales').classList.add('is-danger');
-                document.getElementById('ingresos').classList.add('is-danger');
-                document.getElementById('egresos').classList.add('is-danger');
-                
-                const contenedorGrupo = document.getElementById('error-grupoMontos');
-                if (contenedorGrupo) {
-                    contenedorGrupo.textContent = 'Error: Debes registrar un monto en al menos uno de los tres campos (Ventas, Ingresos o Egresos).';
-                }
-                esValido = false;
-            }
-
-            // Si NO es válido, detenemos el proceso y mostramos alerta
-            if (!esValido) {
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        title: 'Faltan datos requeridos',
-                        text: 'Por favor, revisa los campos señalados en rojo en el formulario.',
-                        icon: 'warning',
-                        confirmButtonColor: '#e63946',
-                        background: '#1f1f1f',
-                        color: '#f1faee'
-                    });
-                } else {
-                    alert('Faltan datos requeridos. Por favor, revisa los campos en rojo.');
-                }
-                return; 
-            }
-
-            // 5. Si todo es correcto, mostramos éxito
-            const resumenHTML = `
-                <div style="text-align: left; font-size: 14px; line-height: 1.6;">
-                    <p><strong>📅 Fecha de Corte:</strong> ${fechaCorte}</p>
-                    <p><strong>📝 Movimiento:</strong> ${concepto}</p>
-                    <p><strong>💰 Total General:</strong> $${parseFloat(valorTotal).toFixed(2)}</p>
-                    <hr style="margin: 10px 0; border: 0; border-top: 1px solid #444;">
-                    <p><strong>🏁 Ventas:</strong> $${ventasSemanales ? parseFloat(ventasSemanales).toFixed(2) : '0.00'}</p>
-                    <p><strong>📈 Ingresos Extra:</strong> $${ingresos ? parseFloat(ingresos).toFixed(2) : '0.00'}</p>
-                    <p><strong>📉 Egresos/Gastos:</strong> $${egresos ? parseFloat(egresos).toFixed(2) : '0.00'}</p>
+        // 6. Alerta de éxito personalizada estilo Dark/Burger Racing
+        Swal.fire({
+            icon: 'success',
+            title: '¡Registro Exitoso!',
+            html: `
+                <div style="text-align: left; background: #2b2b2b; padding: 15px; border-radius: 12px; font-size: 14px; color: #f1faee; line-height: 1.6;">
+                    <p><strong>📅 Fecha:</strong> ${fechaCorte}</p>
+                    <p><strong>📝 Concepto:</strong> ${concepto}</p>
+                    <p style="color: #ffd60a;"><strong>💰 Total:</strong> $${parseFloat(valorTotal).toFixed(2)}</p>
                 </div>
-            `;
-
-            if (typeof Swal !== 'undefined') {
-                Swal.fire({
-                    title: '¡Registro Exitoso!',
-                    html: resumenHTML,
-                    icon: 'success',
-                    confirmButtonColor: '#ffd60a',
-                    confirmButtonText: 'Entendido',
-                    iconColor: '#2ec4b6',
-                    background: '#1f1f1f',
-                    color: '#f1faee'
-                }).then(() => {
-                    form.reset();
-                });
-            } else {
-                alert('¡Registro Exitoso!');
-                form.reset();
-            }
+            `,
+            confirmButtonColor: '#e63946',
+            confirmButtonText: 'Aceptar',
+            background: '#1f1f1f',
+            color: '#f1faee'
+        }).then(() => {
+            formulario.reset();
+            limpiarErrores();
         });
-    }
+    });
 
-    // Botón de Cancelar
-    if (btnCancelar) {
-        btnCancelar.addEventListener('click', function() {
-            if (typeof Swal !== 'undefined') {
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "Se borrarán todos los valores que hayas ingresado.",
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#e63946',
-                    cancelButtonColor: '#555',
-                    confirmButtonText: 'Sí, borrar todo',
-                    cancelButtonText: 'No, seguir aquí',
-                    background: '#1f1f1f',
-                    color: '#f1faee'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        if (form) form.reset();
-                        document.querySelectorAll('.help.is-danger').forEach(el => el.textContent = '');
-                        document.querySelectorAll('.input').forEach(el => el.classList.remove('is-danger'));
-                    }
-                });
-            } else {
-                if (confirm('¿Estás seguro de que quieres limpiar el formulario?')) {
-                    if (form) form.reset();
-                }
-            }
-        });
-    }
+   
+    btnCancelar.addEventListener('click', () => {
+        formulario.reset();
+        limpiarErrores();
+        console.log("🧹 Formulario BURGER RACING reiniciado.");
+    });
 });
